@@ -1,0 +1,56 @@
+<ion-content [fullscreen]="true">
+  <div id="container">
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Login</ion-card-title>
+        <ion-card-subtitle>Faça login para acessar o sistema e gerenciar sua conta</ion-card-subtitle>
+      </ion-card-header>
+      <ion-card-content>
+        <form [formGroup]="loginForm" (submit)="authenticateUser()">
+          <ion-input 
+            type="email" 
+            color="primary" 
+            formControlName="email" 
+            label="E-mail" 
+            label-placement="floating" 
+            fill="outline" 
+            placeholder="Digite seu e-mail"></ion-input>
+          <ion-list lines="none">
+            <ion-item class="form-validation-item" *ngIf="loginForm.get('email')?.hasError('required') && loginForm.get('email')?.touched">
+              <ion-note color="danger">• O e-mail é obrigatório</ion-note>
+            </ion-item>
+            <ion-item class="form-validation-item" *ngIf="loginForm.get('email')?.hasError('email') && loginForm.get('email')?.touched">
+              <ion-note color="danger">• E-mail inválido</ion-note>
+            </ion-item>
+          </ion-list>
+          <ion-input 
+            type="password" 
+            color="primary" 
+            formControlName="password" 
+            label="Senha" 
+            label-placement="floating" 
+            fill="outline" 
+            placeholder="Digite sua senha"></ion-input>
+          <ion-list lines="none">
+            <ion-item class="form-validation-item" *ngIf="loginForm.get('password')?.hasError('required') && loginForm.get('password')?.touched">
+              <ion-note color="danger">• A senha é obrigatória</ion-note>
+            </ion-item>
+            <ion-item class="form-validation-item" *ngIf="loginForm.get('password')?.hasError('minlength') && loginForm.get('password')?.touched">
+              <ion-note color="danger">• A senha deve ter no mínimo 8 caracteres</ion-note>
+            </ion-item>
+            <ion-item class="form-validation-item" *ngIf="loginForm.get('password')?.hasError('maxlength') && loginForm.get('password')?.touched">
+              <ion-note color="danger">• A senha deve ter no máximo 32 caracteres</ion-note>
+            </ion-item>
+          </ion-list>
+          <ion-button type="submit" [disabled]="!loginForm.valid">Entrar</ion-button>
+        </form>
+        <ion-list lines="none" class="server-error-message-list">
+          <ion-item *ngFor="let errorMessage of errorMessages">
+            <ion-label color="danger">• {{errorMessage}}</ion-label>
+          </ion-item>
+        </ion-list>
+        <ion-label>Não possui uma conta? <a href="/cadastrar">Cadastre-se</a></ion-label>
+      </ion-card-content>
+    </ion-card>
+  </div>
+</ion-content>

@@ -1,0 +1,96 @@
+<ion-content [fullscreen]="true">
+  <div id="container">
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Crie sua conta</ion-card-title>
+        <ion-card-subtitle>Preencha os dados para criar sua conta</ion-card-subtitle>
+      </ion-card-header>
+      <ion-card-content>
+        <form [formGroup]="registerForm" (submit)="registerUser()">
+          <ion-input 
+            type="text" 
+            formControlName="username" 
+            label="Usuário" 
+            label-placement="floating" 
+            fill="outline" 
+            placeholder="Digite seu usuário"></ion-input>
+          <ion-list lines="none">
+            <ion-item class="form-validation-item" *ngIf="registerForm.get('username')?.hasError('required') && registerForm.get('username')?.touched">
+              <ion-note color="danger">• O nome de usuário é obrigatório</ion-note>
+            </ion-item>
+            <ion-item class="form-validation-item" *ngIf="registerForm.get('username')?.hasError('minlength') && registerForm.get('username')?.touched">
+              <ion-note color="danger">• O nome de usuário deve ter no mínimo 3 caracteres</ion-note>
+            </ion-item>
+            <ion-item class="form-validation-item" *ngIf="registerForm.get('username')?.hasError('maxlength') && registerForm.get('username')?.touched">
+              <ion-note color="danger">• O nome de usuário deve ter no máximo 32 caracteres</ion-note>
+            </ion-item>
+            <ion-item class="form-validation-item" *ngIf="registerForm.get('username')?.hasError('pattern') && registerForm.get('username')?.touched">
+              <ion-note color="danger">• O nome de usuário pode conter apenas letras maiúsculas, minúsculas e underscore (_)</ion-note>
+            </ion-item>
+          </ion-list>
+          <ion-input 
+            type="email" 
+            formControlName="email" 
+            label="E-mail" 
+            label-placement="floating" 
+            fill="outline" 
+            placeholder="Digite seu e-mail"></ion-input>
+          <ion-list lines="none">
+            <ion-item class="form-validation-item" *ngIf="registerForm.get('email')?.hasError('required') && registerForm.get('email')?.touched">
+              <ion-note color="danger">• O e-mail é obrigatório</ion-note>
+            </ion-item>
+            <ion-item class="form-validation-item" *ngIf="registerForm.get('email')?.hasError('email') && registerForm.get('email')?.touched">
+              <ion-note color="danger">• E-mail inválido</ion-note>
+            </ion-item>
+          </ion-list>
+          <ion-input 
+            type="password" 
+            formControlName="password" 
+            label="Senha" 
+            label-placement="floating" 
+            fill="outline" 
+            placeholder="Digite sua senha"></ion-input>
+          <ion-list lines="none">
+            <ion-item class="form-validation-item" *ngIf="registerForm.get('password')?.hasError('required') && registerForm.get('password')?.touched">
+              <ion-note color="danger">• A senha é obrigatória</ion-note>
+            </ion-item>
+            <ion-item class="form-validation-item" *ngIf="registerForm.get('password')?.hasError('minlength') && registerForm.get('password')?.touched">
+              <ion-note color="danger">• A senha deve ter no mínimo 8 caracteres</ion-note>
+            </ion-item>
+            <ion-item class="form-validation-item" *ngIf="registerForm.get('password')?.hasError('maxlength') && registerForm.get('password')?.touched">
+              <ion-note color="danger">• A senha deve ter no máximo 32 caracteres</ion-note>
+            </ion-item>
+          </ion-list>
+          <ion-input 
+            type="password" 
+            formControlName="passwordConfirmation" 
+            label="Confirmar senha" 
+            label-placement="floating" 
+            fill="outline" 
+            placeholder="Confirme sua senha"></ion-input>
+          <ion-list lines="none">
+            <ion-item class="form-validation-item" *ngIf="registerForm.get('passwordConfirmation')?.hasError('required') && registerForm.get('passwordConfirmation')?.touched">
+              <ion-note color="danger">• A senha é obrigatória</ion-note>
+            </ion-item>
+            <ion-item class="form-validation-item" *ngIf="registerForm.get('passwordConfirmation')?.hasError('minlength') && registerForm.get('passwordConfirmation')?.touched">
+              <ion-note color="danger">• A senha deve ter no mínimo 8 caracteres</ion-note>
+            </ion-item>
+            <ion-item class="form-validation-item" *ngIf="registerForm.get('passwordConfirmation')?.hasError('maxlength') && registerForm.get('passwordConfirmation')?.touched">
+              <ion-note color="danger">• A senha deve ter no máximo 32 caracteres</ion-note>
+            </ion-item>
+            <ion-item class="form-validation-item" *ngIf="registerForm.hasError('passwordMismatch') && registerForm.get('passwordConfirmation')?.touched">
+              <ion-note color="danger">• As senhas devem ser iguais</ion-note>
+            </ion-item>
+          </ion-list>
+          <ion-button type="submit" [disabled]="!registerForm.valid">Cadastrar</ion-button>
+        </form>
+        <ion-list lines="none" class="server-error-message-list">
+          <ion-item *ngFor="let errorMessage of errorMessages">
+            <ion-label color="danger">• {{errorMessage}}</ion-label>
+          </ion-item>
+        </ion-list>
+        <ion-label>Já tem uma conta? <a href="/login">Entrar</a></ion-label>
+      </ion-card-content>
+    </ion-card>
+  </div>
+</ion-content>

@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">authmanagerangularui</string>
+    <string name="title_activity_main">authmanagerangularui</string>
+    <string name="package_name">ionic.authmanagerangularui</string>
+    <string name="custom_url_scheme">ionic.authmanagerangularui</string>
+</resources>

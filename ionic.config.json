@@ -1,0 +1,7 @@
+{
+  "name": "authmanagerangularui",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}
